@@ -98,6 +98,7 @@
     <select id="bookmaker">
       <option value="goldbet">Goldbet</option>
       <option value="betflag">Betflag</option>
+      <option value="totosi",>Totosi</option>
     </select>
 
     <!-- GOLDBET -->
@@ -118,6 +119,15 @@
       <input type="number" id="betflag_importo" placeholder="Es: 30">
     </div>
 
+    <!-- TOTOSI -->
+    <div id="totosiFields" class="hidden">
+      <label for="totosi_username">Username</label>
+      <input type="text" id="totosi_username" placeholder="Es: lorenzo_bet">
+      <label for="totosi_importo">Importo (€)</label>
+      <input type="number" id="totosi_importo" placeholder="Es: 30">
+    </div>
+    
+
     <button onclick="generaMessaggio()">📲 Invia su WhatsApp</button>
 
     <textarea id="messaggio" readonly placeholder="Messaggio generato..."></textarea>
@@ -127,11 +137,13 @@
     const bookmakerSelect = document.getElementById('bookmaker');
     const goldbetFields = document.getElementById('goldbetFields');
     const betflagFields = document.getElementById('betflagFields');
+    const totosiFields = document.getElementById('totosiFields');
 
     bookmakerSelect.addEventListener('change', () => {
       const val = bookmakerSelect.value;
       goldbetFields.classList.toggle('hidden', val !== 'goldbet');
       betflagFields.classList.toggle('hidden', val !== 'betflag');
+      totosiFields.classList.toggle('hidden', val !== 'totosi');
     });
 
     function generaMessaggio() {
@@ -159,7 +171,18 @@
         }
 
         testo = `🔵 *BONUS BETFLAG*\nUsername: ${username}\nRicarica: €${importo}`;
+      } else {
+        const username = document.getElementById('totosi_username').value.trim();
+        const importo = document.getElementById('totosi_importo').value.trim();
+
+        if (!username || !importo) {
+          alert('Compila tutti i campi per Totosi!');
+          return;
+        }
+
+        testo = `🟣 *BONUS TOTOSI*\nUsername: ${username}\nRicarica: €${importo}`;
       }
+
 
       document.getElementById('messaggio').value = testo;
 
