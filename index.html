@@ -134,62 +134,64 @@
   </div>
 
   <script>
-    const bookmakerSelect = document.getElementById('bookmaker');
-    const goldbetFields = document.getElementById('goldbetFields');
-    const betflagFields = document.getElementById('betflagFields');
-    const totosiFields = document.getElementById('totosiFields');
+  const bookmakerSelect = document.getElementById('bookmaker');
+  const goldbetFields = document.getElementById('goldbetFields');
+  const betflagFields = document.getElementById('betflagFields');
+  const totosiFields = document.getElementById('totosiFields');
 
-    bookmakerSelect.addEventListener('change', () => {
-      const val = bookmakerSelect.value;
-      goldbetFields.classList.toggle('hidden', val !== 'goldbet');
-      betflagFields.classList.toggle('hidden', val !== 'betflag');
-      totosiFields.classList.toggle('hidden', val !== 'totosi');
-    });
+  bookmakerSelect.addEventListener('change', () => {
+    const val = bookmakerSelect.value;
+    goldbetFields.classList.toggle('hidden', val !== 'goldbet');
+    betflagFields.classList.toggle('hidden', val !== 'betflag');
+    totosiFields.classList.toggle('hidden', val !== 'totosi');
+  });
 
-    function generaMessaggio() {
-      const bookmaker = bookmakerSelect.value;
-      let testo = '';
+  function generaMessaggio() {
+    const bookmaker = bookmakerSelect.value;
+    let testo = '';
 
-      if (bookmaker === 'goldbet') {
-        const id = document.getElementById('goldbet_id').value.trim();
-        const username = document.getElementById('goldbet_username').value.trim();
-        const importo = document.getElementById('goldbet_importo').value.trim();
+    if (bookmaker === 'goldbet') {
+      const id = document.getElementById('goldbet_id').value.trim();
+      const username = document.getElementById('goldbet_username').value.trim();
+      const importo = document.getElementById('goldbet_importo').value.trim();
 
-        if (!id || !username || !importo) {
-          alert('Compila tutti i campi per Goldbet!');
-          return;
-        }
-
-        testo = `🟡 *BONUS GOLDBET*\nID: ${id}\nUsername: ${username}\nRicarica: €${importo}`;
-      } else if {
-        const username = document.getElementById('betflag_username').value.trim();
-        const importo = document.getElementById('betflag_importo').value.trim();
-
-        if (!username || !importo) {
-          alert('Compila tutti i campi per Betflag!');
-          return;
-        }
-
-        testo = `🔵 *BONUS BETFLAG*\nUsername: ${username}\nRicarica: €${importo}`;
-      } else if {
-        const username = document.getElementById('totosi_username').value.trim();
-        const importo = document.getElementById('totosi_importo').value.trim();
-
-        if (!username || !importo) {
-          alert('Compila tutti i campi per Totosi!');
-          return;
-        }
-
-        testo = `🟣 *BONUS TOTOSI*\nUsername: ${username}\nRicarica: €${importo}`;
+      if (!id || !username || !importo) {
+        alert('Compila tutti i campi per Goldbet!');
+        return;
       }
 
+      testo = `🟡 *BONUS GOLDBET*\nID: ${id}\nUsername: ${username}\nRicarica: €${importo}`;
 
-      document.getElementById('messaggio').value = testo;
+    } else if (bookmaker === 'betflag') {
+      const username = document.getElementById('betflag_username').value.trim();
+      const importo = document.getElementById('betflag_importo').value.trim();
 
-      const numero = '393458774656'; // ← Inserisci il numero WhatsApp del referente
-      const link = `https://wa.me/${numero}?text=${encodeURIComponent(testo)}`;
-      window.open(link, '_blank');
+      if (!username || !importo) {
+        alert('Compila tutti i campi per Betflag!');
+        return;
+      }
+
+      testo = `🔵 *BONUS BETFLAG*\nUsername: ${username}\nRicarica: €${importo}`;
+
+    } else if (bookmaker === 'totosi') {
+      const username = document.getElementById('totosi_username').value.trim();
+      const importo = document.getElementById('totosi_importo').value.trim();
+
+      if (!username || !importo) {
+        alert('Compila tutti i campi per Totosi!');
+        return;
+      }
+
+      testo = `🟣 *BONUS TOTOSI*\nUsername: ${username}\nRicarica: €${importo}`;
     }
-  </script>
+
+    document.getElementById('messaggio').value = testo;
+
+    const numero = '393458774656'; 
+    const link = `https://wa.me/${numero}?text=${encodeURIComponent(testo)}`;
+    window.open(link, '_blank');
+  }
+</script>
+
 </body>
 </html>
